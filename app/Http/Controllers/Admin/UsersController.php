@@ -46,15 +46,7 @@ class UsersController extends Controller
         
         return view('admin.users.index', compact('users'));
     }
-    public function manage(){
-    $id = auth()->user()->id;
-
-        $user  = DB::table('brandings')->where('user_id',$id)->get();
- 
-        // dd($user[0]);
-
-return view('admin.users.editResellar', compact('user'));
-}
+    
 
     public function listResellers()
     { 
@@ -232,9 +224,8 @@ public function pending()
 
         $abilities = Role::first()->getAbilities()->take('500');
 
-
-
-        return view('admin.users.createReseller', compact('roles','abilities','spAccounts','cfAccounts'));
+        $pckg = DB::table("packages")->get();
+        return view('admin.users.createReseller', compact('roles','abilities','spAccounts','cfAccounts' , 'pckg'));
     }
 
     /**
@@ -314,81 +305,97 @@ public function pending()
         // foreach ($request->input('roles') as $role) {
              $user->assign('reseller');
         // }
+    $id = $user->id;
+    if($id ==null){
+        $id=0;
+    }
+
+    Branding::create([
+                'name' => $request->input('name'),
+                'url'  => "",
+                'email' => $request->input('email'),
+                'temp_url' => '',  
+                'logo' => '', 
+                'user_id' => $user->id,
+                'sp' => $request->input('description'),
+                'pckg_detail' => $request->input('pckg'),
+                
+             ]);
 
              //$url = strtolower(str_random(5))."_".str_slug($user->name).".panel.blockdos.net";
              
-if($request->input('pckg') == "Pacakge 1"){
-    Branding::create([
-                'name' => $request->input('name'),
-                'url'  => "",
-                'email' => $request->input('email'),
-                'temp_url' => '',
-                'logo' => '',
-                'user_id' => $user->id,
-                'cf' => '5',
-                'sp' => $request->input('description'),
-                'Show_Setting' => '1',
-                'BlackList' => '1',
-                'Add_Delete_Site' => '1',
+// if($request->input('pckg') == "Pacakge 1"){
+//     Branding::create([
+//                 'name' => $request->input('name'),
+//                 'url'  => "",
+//                 'email' => $request->input('email'),
+//                 'temp_url' => '',
+//                 'logo' => '',
+//                 'user_id' => $user->id,
+//                 'cf' => '5',
+//                 'sp' => $request->input('description'),
+//                 'Show_Setting' => '1',
+//                 'BlackList' => '1',
+//                 'Add_Delete_Site' => '1',/
                 
-             ]);
-}
-else if($request->input('pckg') == "Pacakge 2"){
-    Branding::create([
-                'name' => $request->input('name'),
-                'url'  => "",
-                'email' => $request->input('email'),
-                'temp_url' => '',
-                'logo' => '',
-                'user_id' => $user->id,
-                'cf' => '10',
-                'sp' => $request->input('description'),
-                'Show_Setting' => '1',
-                'BlackList' => '1',
-                'Add_Delete_Site' => '1',
-                'Clear_Cache' => '1',
-                'Audit_Trails' => '1',
+//              ]);
+// }
+// else if($request->input('pckg') == "Pacakge 2"){
+//     Branding::create([
+//                 'name' => $request->input('name'),
+//                 'url'  => "",
+//                 'email' => $request->input('email'),
+//                 'temp_url' => '',
+//                 'logo' => '',
+//                 'user_id' => $user->id,
+//                 'cf' => '10',
+//                 'sp' => $request->input('description'),
+//                 'Show_Setting' => '1',
+//                 'BlackList' => '1',
+//                 'Add_Delete_Site' => '1',
+//                 'Clear_Cache' => '1',
+//                 'Audit_Trails' => '1',
                 
-             ]);
-}
- else if($request->input('pckg') == "Pacakge 3"){
-    Branding::create([
-                'name' => $request->input('name'),
-                'url'  => "",
-                'email' => $request->input('email'),
-                'temp_url' => '',
-                'logo' => '',
-                'user_id' => $user->id,
-                'cf' => '20',
-                'sp' => $request->input('description'),
-                'Show_Setting' =>'1',
-                'BlackList' => '1',
-                'Add_Delete_Site' => '1',
-                'Clear_Cache' => '1',
-                'Audit_Trails' => '1',
-                'Protected_Pages' => '1',
-                'Reports_Settings' => '1',
-                ]);
-}
-else{
-    Branding::create([
-                'name' => $request->input('name'),
-                'url'  => "",
-                'email' => $request->input('email'),
-                'temp_url' => '',
-                'logo' => '',
-                'user_id' => $user->id,
-                'cf' => $request->input('cfAllowed'),
-                'sp' => $request->input('description'),
-                'Show_Setting' => $request->input('Show_Setting'),
-                'BlackList' => $request->input('BlackList'),
-                'Add_Delete_Site' => $request->input('Add_Delete_Site'),
-                'Clear_Cache' => $request->input('Clear_Cache'),
-                'Audit_Trails' => $request->input('Audit_Trails'),
-                'Protected_Pages' => $request->input('Protected_Pages'),
-                'Reports_Settings' => $request->input('Reports_Settings'),
-             ]);
-}            
+//              ]);
+// }
+//  else if($request->input('pckg') == "Pacakge 3"){
+//     Branding::create([
+//                 'name' => $request->input('name'),
+//                 'url'  => "",
+//                 'email' => $request->input('email'),
+//                 'temp_url' => '',
+//                 'logo' => '',
+//                 'user_id' => $user->id,
+//                 'cf' => '20',
+//                 'sp' => $request->input('description'),
+//                 'Show_Setting' =>'1',
+//                 'BlackList' => '1',
+//                 'Add_Delete_Site' => '1',
+//                 'Clear_Cache' => '1',
+//                 'Audit_Trails' => '1',
+//                 'Protected_Pages' => '1',
+//                 'Reports_Settings' => '1',
+//                 ]);
+// }
+// else{
+//     Branding::create([
+//                 'name' => $request->input('name'),
+//                 'url'  => "",
+//                 'email' => $request->input('email'),
+//                 'temp_url' => '',
+//                 'logo' => '',
+//                 'user_id' => $user->id,
+//                 'cf' => $request->input('cfAllowed'),
+//                 'sp' => $request->input('description'),
+//                 'Show_Setting' => $request->input('Show_Setting'),
+//                 'BlackList' => $request->input('BlackList'),
+//                 'Add_Delete_Site' => $request->input('Add_Delete_Site'),
+//                 'Clear_Cache' => $request->input('Clear_Cache'),
+//                 'Audit_Trails' => $request->input('Audit_Trails'),
+//                 'Protected_Pages' => $request->input('Protected_Pages'),
+//                 'Reports_Settings' => $request->input('Reports_Settings'),
+//              ]);
+// }            
 
         return redirect()->route('admin.listResellers');
     }

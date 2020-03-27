@@ -143,7 +143,7 @@ Route::get('{zone}/reports', 'Admin\ZoneController@reportsss');
 
     Route::delete('{zone}/customDomain/delete','Admin\ZoneController@deleteCustomDomain');
 
-    Route::put('{zone}/createCustomDomain','Admin\ZoneController@createCustomDomain');
+    Route::put('{zone}/createCustomDomain','Admin\ZoneController@createCustomDomain'); 
 
     Route::POST('{zone}/createDNS','Admin\DnsController@createDNS');
 

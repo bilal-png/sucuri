@@ -6,7 +6,7 @@ use App\Package;
 use App\User;
 use App\Branding;
 use App\Cfaccount;
-use App\Spaccount;
+use App\Spaccount; 
 
 use Silber\Bouncer\Database\Ability;
 use Silber\Bouncer\Database\Role;

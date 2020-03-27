@@ -23,7 +23,10 @@
                    $ided=auth()->user()->id;
 // $ided=20;
                    // dd($ided);
-                     $sucuri_userss1 = DB::table('brandings')->where('user_id' , $ided)->get();
+                     $sucuri_userss1 = DB::table('brandings') 
+    ->join('packages', 'packages.id', '=', 'brandings.pckg_detail')
+    ->where('brandings.user_id', $ided)
+    ->get();
                         // dd($sucuri_userss1[0]->Show_Setting);
                      if( $ided > 1){
                         if($sucuri_userss1[0]->Show_Setting == 1){

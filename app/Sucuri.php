@@ -11,9 +11,10 @@ class Sucuri extends Model
     protected $dates = ['deleted_at'];
 
     protected $table = 'sucuri_user';
-    
 
     public $guarded = ['id'];
+
+ 
 
    /* protected $fillable = [
         'name',

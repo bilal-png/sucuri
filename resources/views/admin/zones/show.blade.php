@@ -7,7 +7,9 @@
 <?php
 $result=json_decode($ok);
 //$messages = $result->messages;
- //print_r($result->output);  ?>
+ //print_r($result->output);
+
+   ?>
 <div class="row">
                 <div class="col-xs-12" style="background: white;">
                     
@@ -23,7 +25,8 @@ $result=json_decode($ok);
                     <td><b>Internal IP Address:</b> {{$result->output->internal_ip_main}}</td>
                     <td><b>Proxy :</b>{{$result->output->proxy_active}} </td>
                     
-                    <td><b>White Listed Ip Address:</b>@foreach ($result->output->whitelist_list as $white) {{ print_r($white)}}  @endforeach</td>
+                    <td><b>White Listed Ip Address:</b>@if ($result->output->whitelist_list !=null) {{ print_r($result->output->whitelist_list)}}  
+                    @else {{None}} @endif</td>
                    
 
                 </tr>

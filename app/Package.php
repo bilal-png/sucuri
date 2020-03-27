@@ -1,4 +1,4 @@
- <?php
+<?php
 
 namespace App;
 
@@ -11,19 +11,10 @@ use Silber\Bouncer\Database\HasRolesAndAbilities;
 
 class Package extends Model
 {
-	use HasRolesAndAbilities;
+     use HasRolesAndAbilities;
     protected $table = 'packages';
-    protected $guarded = ['id'];
+  protected $guarded = ['id'];
 
 
-  	public function Sucuri() 
-    {
-        return $this->belongsTo('App\Sucuri');
-    }
-
-    public function pckg_detail()  
-    {
-        return $this->hasMany('App\pckg_detail','package_id');
-    }
-
+  
 }

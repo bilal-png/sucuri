@@ -32,11 +32,20 @@
 
 
 $ided=auth()->user()->id;
- $sucuri_userss = DB::table('brandings')->where('user_id' , $ided)->get();
- $limit = 0 ;
+ // $sucuri_userss = DB::table('brandings')->where('user_id' , $ided)->get();
+$sucuri_userss = DB::table('brandings') 
+    ->join('packages', 'packages.id', '=', 'brandings.pckg_detail')
+    ->where('brandings.user_id', $ided)
+    ->get();
+
+ $limit = 0 ; 
+ // dd($sucuri_userss[0]);
+
+ // $pckg = DB::table('packages')->where('user_id' , $ided)->get();
+ 
    foreach($sucuri_userss as $cf){
-       $limit = $cf->cf;
-   }
+       $limit = $cf->domains;
+   } 
 
 ?>
         <div class="panel-body table-responsive">

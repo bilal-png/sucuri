@@ -38,8 +38,6 @@
                         <th>Price</th>
                         <th>description</th>
                         <th>Domains</th>
-                        
-                        
                         <th>&nbsp;</th>
 
                     </tr>
